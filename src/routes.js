@@ -15,7 +15,14 @@ function Routes() {
         name="Home"
         component={Home}
         options={{
-          headerShown: false
+          title: 'Pokédex',
+          headerTitleAlign: 'center',
+          headerTintColor: "#FFF",
+          
+          headerStyle:{
+            backgroundColor: '#D10000'
+          },
+          
         }}
       />
 
@@ -23,7 +30,11 @@ function Routes() {
         name="Details"
         component={Details}
         options={{
-          headerShown: false
+          title: 'Pokémon Details',
+         
+          headerStyle:{
+            backgroundColor: '#FFF'
+          }
         }}
       />
 

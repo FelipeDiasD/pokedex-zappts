@@ -7,7 +7,8 @@ import {
   FlatList,
   Image,
   StatusBar,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground
 
 } from 'react-native'
 
@@ -17,6 +18,8 @@ import {Feather} from '@expo/vector-icons'
 
 import api from '../../services/api'
 import PokemonCardItem from '../../Components/PokemonCardItem'
+
+
 
 
 
@@ -45,19 +48,21 @@ const navigation = useNavigation()
   
   )
 
-
+  
   return (
     <SafeAreaView style={styles.container}>
       
       <StatusBar hidden = {true}/>
 
       <View style={styles.header}>
-         <Text style={styles.greetingsTitle}>Olá treinador!</Text>
-         <Image/>   
+        
+        <Text style={styles.greetingsTitle}>Welcome to the pokédex!</Text>
+         
+          
       </View>
 
       <View style = {styles.middleSection}>
-        <Text style = {styles.greetingsAskToChoose}>Qual pokémon você irá escolher?</Text>
+        <Text style = {styles.greetingsAskToChoose}>Witch pokémon you are looking for?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Search', {pokemonData: returnedPokemons})}>
           <Feather name="search" size={25} color="#000" />
         </TouchableOpacity>
@@ -88,15 +93,26 @@ const styles = StyleSheet.create({
 
   header: {
     flexDirection: 'row',
-    backgroundColor: '#494949',
-    justifyContent: 'flex-start',
+    backgroundColor: '#8A8A8A',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 0,
     paddingTop: 60,
     paddingLeft: 22,
     paddingBottom: 35,
+    borderWidth:1,
+    borderColor: "#000",
     borderBottomStartRadius: 24,
-    borderBottomEndRadius: 24
+    borderBottomEndRadius: 24,
+
+    shadowColor: "#000",
+    shadowOffset: {
+   width: 0,
+   height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
 
   greetingsTitle: {
@@ -115,11 +131,6 @@ const styles = StyleSheet.create({
   greetingsAskToChoose:{
     fontSize: 24,
 
-  },
-
-  trainerPhoto: {
-    height: 47,
-    width: 47
   },
 
   pokemonCardList : {
