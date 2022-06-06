@@ -9,7 +9,7 @@
 - User info and Photo login 🛠️
 - Final tweaks 🆗
 
-##Principais desafios encontrados
+## Principais desafios encontrados
 
 
 
