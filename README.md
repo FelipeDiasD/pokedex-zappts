@@ -24,7 +24,7 @@ nome pesquisado pelo usuário.
 
 ## Método dos testes realizados
 
-Os testes realizados foram básicos, sendo o famoso console.log, para verificar
+Os testes realizados foram bastante primitivos, sendo o famoso console.log, para verificar
 a resposta que a API estava retornando e o método Alert(), o qual era utilizado 
 para verificar o funcionamento dos Componentes Touchable.
 
