@@ -1,13 +1,16 @@
 import React from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 
+import ReturnColor from '../../Utilites/Colors'
 
 export default function PokemonStatBar ({progressValue, nameStat}) {
+    const statColor = ReturnColor(nameStat)
+    
     return(
         <View style = {styles().barContainer}>
         <Text style = {styles().statText}> {nameStat} </Text>
             <View style = {styles().progressBar}>
-              <View style= { styles(progressValue).progress}/>
+              <View style= { styles(progressValue, statColor).progress}/>
             </View>
         </View>
 
@@ -15,7 +18,7 @@ export default function PokemonStatBar ({progressValue, nameStat}) {
     )
 }
 
-styles = (progressValue) => StyleSheet.create({
+styles = (progressValue, statColor) => StyleSheet.create({
 barContainer:{
 
  padding : 7,
@@ -53,12 +56,14 @@ barContainer:{
         width: `${progressValue}%`,
         height: '100%',
         borderRadius: 30,
-        backgroundColor: 'blue'
+        backgroundColor: `${statColor}`
 
 
     }  ,
 
     statText:{
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        fontSize: 16,
+        fontWeight: '600'
     }
 })

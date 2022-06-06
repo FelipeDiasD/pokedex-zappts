@@ -7,10 +7,13 @@ import {
   FlatList,
   Image,
   StatusBar,
+  TouchableOpacity
 
 } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
+
+import {Feather} from '@expo/vector-icons'
 
 import api from '../../services/api'
 import PokemonCardItem from '../../Components/PokemonCardItem'
@@ -30,9 +33,11 @@ const navigation = useNavigation()
   useEffect ( () => {
  
     async function loadData(){
-       const pokemon =  await api.get("pokemon")
+       const pokemon =  await api.get("pokemon?limit=150&offset=0")
        
-       setRetunedPokemons (pokemon.data.results)
+       setRetunedPokemons (pokemon?.data?.results)
+
+       console.log(returnedPokemons)
     } 
     
     loadData()
@@ -43,6 +48,7 @@ const navigation = useNavigation()
 
   return (
     <SafeAreaView style={styles.container}>
+      
       <StatusBar hidden = {true}/>
 
       <View style={styles.header}>
@@ -52,10 +58,14 @@ const navigation = useNavigation()
 
       <View style = {styles.middleSection}>
         <Text style = {styles.greetingsAskToChoose}>Qual pokémon você irá escolher?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Search', {pokemonData: returnedPokemons})}>
+          <Feather name="search" size={25} color="#000" />
+        </TouchableOpacity>
       </View>
 
       <FlatList
       alignItems = 'center'
+      showsVerticalScrollIndicator = {false}
       numColumns = {2}
       data = {returnedPokemons}
       keyExtractor = {(item, index) => String(index)}
@@ -94,7 +104,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   middleSection:{
-    
+
+    flexDirection:'row',
+    justifyContent: 'space-between',
     marginVertical: 10,
     paddingLeft: 21 ,
     paddingRight: 50
