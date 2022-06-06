@@ -10,6 +10,10 @@
 - Final tweaks 🆗
 
 ## Principais desafios encontrados
+- Estilização com componentes do tipo lista (ScrollView e FlatList):
+São componentes que possuem caracteríticas únicas e portanto foram um pouco mais difíceis de lidar
+para deixar do jeito que eu queria, mas no fim deu certo.
+
 - Manipulação dos dados da APi: manipulação de objetos, arrays e os 
 tipos de valores que eram retormados.
 
