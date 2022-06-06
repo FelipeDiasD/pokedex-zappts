@@ -53,7 +53,7 @@ barContainer:{
       },
     progress:{
         ...StyleSheet.absoluteFill,
-        width: `${progressValue}%`,
+        width: `${progressValue/1.5}%`,
         height: '100%',
         borderRadius: 30,
         backgroundColor: `${statColor}`

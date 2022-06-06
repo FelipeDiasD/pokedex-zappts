@@ -51,11 +51,12 @@ export default function Search() {
   
      console.log(cleanResponse)
 
-      
+     setSearchedPokemons('')
 
       setSearchedPokemons(cleanResponse)
 
       setInput('')
+      
       Keyboard.dismiss()
 
     

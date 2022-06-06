@@ -36,7 +36,7 @@ const navigation = useNavigation()
   useEffect ( () => {
  
     async function loadData(){
-       const pokemon =  await api.get("pokemon?limit=150&offset=0")
+       const pokemon =  await api.get("pokemon?limit=150&offset=0") //limitado a 150(região de kanto) mas pode ser aumentado
        
        setRetunedPokemons (pokemon?.data?.results)
 
@@ -63,9 +63,11 @@ const navigation = useNavigation()
 
       <View style = {styles.middleSection}>
         <Text style = {styles.greetingsAskToChoose}>Witch pokémon you are looking for?</Text>
+        
         <TouchableOpacity onPress={() => navigation.navigate('Search', {pokemonData: returnedPokemons})}>
           <Feather name="search" size={25} color="#000" />
         </TouchableOpacity>
+
       </View>
 
       <FlatList
@@ -122,6 +124,7 @@ const styles = StyleSheet.create({
   middleSection:{
 
     flexDirection:'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     marginVertical: 10,
     paddingLeft: 21 ,
