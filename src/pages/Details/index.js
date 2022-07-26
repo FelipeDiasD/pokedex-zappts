@@ -1,53 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 import {
   View,
   Text,
   Image,
   StyleSheet,
   SafeAreaView,
-  ScrollView,
-} from "react-native";
+  ScrollView
+} from 'react-native'
 
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
+import { useNavigation, useRoute } from '@react-navigation/native'
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import PokemonStatBar from '../../Components/PokemonStatBar'
 
-import { useNavigation, useRoute } from "@react-navigation/native";
+import PokemonTypeCard from '../../Components/PokemonTypeCard'
 
-import PokemonStatBar from "../../Components/PokemonStatBar";
-
-import PokemonTypeCard from "../../Components/PokemonTypeCard";
-
-import api from "../../services/api";
+import api from '../../services/api'
 
 export default function Details() {
-  const route = useRoute();
-  const navigation = useNavigation();
+  const route = useRoute()
 
-  const [pokemonDetails, setPokemonDetails] = useState([]);
+  const [pokemonDetails, setPokemonDetails] = useState([])
 
   useEffect(() => {
     async function loadData() {
       const selectedPokemon = await api.get(
         `pokemon-species/${route.params?.pokemonName}`
-      );
+      )
 
-      setPokemonDetails(selectedPokemon);
+      setPokemonDetails(selectedPokemon)
     }
 
-    loadData();
-  }, []);
+    loadData()
+  }, [])
 
   return (
     <SafeAreaView style={styles(route.params?.mainColor).container}>
       <ScrollView style={styles().scrollView}>
         <View style={styles(route.params?.mainColor).header}>
-
           <Text style={styles().headerNumberPokemon}>
             Nº #{pokemonDetails?.data?.id}
           </Text>
 
-          <Text style={styles().headerTitlePokemon}>{route.params?.pokemonName}</Text>
+          <Text style={styles().headerTitlePokemon}>
+            {route.params?.pokemonName}
+          </Text>
 
           <PokemonTypeCard
             size="30%"
@@ -83,7 +81,6 @@ export default function Details() {
           </Text>
 
           <View style={styles().mainStatsSection}>
-
             <View style={styles().cardMainStats}>
               <Text style={styles().textMainStats}>
                 {route.params?.pokemonHeight}m
@@ -96,8 +93,9 @@ export default function Details() {
               <Text>Height</Text>
             </View>
 
-            <Text>|{'\n'}|{'\n'}|{'\n'}|{'\n'}|{'\n'}|</Text>
-
+            <Text>
+              |{'\n'}|{'\n'}|{'\n'}|{'\n'}|{'\n'}|
+            </Text>
 
             <View style={styles().cardMainStats}>
               <Text style={styles().textMainStats}>
@@ -107,11 +105,13 @@ export default function Details() {
               <Text>Weight</Text>
             </View>
 
-            <Text>|{'\n'}|{'\n'}|{'\n'}|{'\n'}|{'\n'}|</Text>
+            <Text>
+              |{'\n'}|{'\n'}|{'\n'}|{'\n'}|{'\n'}|
+            </Text>
 
             <View style={styles().cardMainStats}>
               <Text style={styles().textMainStats}>
-                {(route.params?.mainMove?.name).replace(/[^a-zA-Z0-9 ]/g, " ")}
+                {(route.params?.mainMove?.name).replace(/[^a-zA-Z0-9 ]/g, ' ')}
               </Text>
               <MaterialCommunityIcons
                 name="lightning-bolt-outline"
@@ -155,135 +155,133 @@ export default function Details() {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
+  )
 }
 
-const styles = (mainColor) =>
+const styles = mainColor =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: `${mainColor}`,
+      backgroundColor: `${mainColor}`
       //alignItems: 'center',
     },
 
     scrollView: {
       flexGrow: 1,
-      flexDirection: "column",
+      flexDirection: 'column'
     },
 
     header: {
       height: 320,
       //backgroundColor: `${mainColor}`,
-      justifyContent: "flex-start",
-      padding: 12,
+      justifyContent: 'flex-start',
+      padding: 12
     },
 
     headerBasicData: {
-      width: "30%",
+      width: '30%'
     },
 
     headerTitlePokemon: {
       fontSize: 20,
-      textTransform: "capitalize",
-      fontWeight: "bold",
-      color: "#FFF",
-      alignSelf: "flex-start",
+      textTransform: 'capitalize',
+      fontWeight: 'bold',
+      color: '#FFF',
+      alignSelf: 'flex-start',
       marginBottom: 15
-
     },
 
     headerNumberPokemon: {
       fontSize: 20,
-      textTransform: "capitalize",
-      fontWeight: "bold",
-      color: "#000",
+      textTransform: 'capitalize',
+      fontWeight: 'bold',
+      color: '#000',
       opacity: 0.5,
-      borderColor: "#000",
-      textDecorationStyle: "solid",
-      alignSelf: "flex-end",
+      borderColor: '#000',
+      textDecorationStyle: 'solid',
+      alignSelf: 'flex-end'
     },
 
     mainImage: {
       top: 110,
 
       left: 70,
-      position: "absolute",
+      position: 'absolute',
       //alignSelf: 'center',
       width: 250,
       height: 250,
-      zIndex: 100,
+      zIndex: 100
     },
 
     containerPokemonData: {
-      width: "100%",
-      alignItems: "center",
+      width: '100%',
+      alignItems: 'center',
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
-      backgroundColor: "#FFF",
-      padding: 10,
+      backgroundColor: '#FFF',
+      padding: 10
     },
 
     descriptionSection: {
-      alignItems: "flex-start",
-      justifyContent: "space-between",
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
       paddingHorizontal: 20,
       paddingBottom: 50,
 
-      width: "100%",
+      width: '100%'
     },
 
     titleDescription: {
       fontSize: 20,
-      alignSelf: "flex-start",
+      alignSelf: 'flex-start',
       marginTop: 20,
       marginBottom: 40,
-      fontWeight: "bold",
+      fontWeight: 'bold',
       color: `${mainColor}`,
 
-      textShadowColor: "#C7C7C7",
+      textShadowColor: '#C7C7C7',
       textShadowOffset: {
         width: 0,
-        height: 2,
+        height: 2
       },
-      textShadowRadius: 2,
+      textShadowRadius: 2
     },
 
     textDescription: {
-      textAlign: "left",
+      textAlign: 'left',
       fontSize: 16,
-      fontWeight: "600",
-      textTransform: "capitalize",
-      marginBottom: 15,
+      fontWeight: '600',
+      textTransform: 'capitalize',
+      marginBottom: 15
     },
     mainStatsTitleText: {
       fontSize: 20,
-      fontWeight: "bold",
-      alignSelf: "flex-start",
+      fontWeight: 'bold',
+      alignSelf: 'flex-start',
       marginLeft: 15,
       color: `${mainColor}`,
       marginBottom: 40,
-      
 
-      textShadowColor: "#C7C7C7",
+      textShadowColor: '#C7C7C7',
       textShadowOffset: {
         width: 0,
-        height: 2,
+        height: 2
       },
-      
-      textShadowRadius: 2,
+
+      textShadowRadius: 2
     },
     mainStatsSection: {
-      flexDirection: "row",
-      alignItems: "center",
+      flexDirection: 'row',
+      alignItems: 'center',
       justifyContent: 'space-evenly',
-      width: "100%",
+      width: '100%',
       paddingHorizontal: 5,
-      backgroundColor: "#FFF",
-      paddingBottom: 60,
+      backgroundColor: '#FFF',
+      paddingBottom: 60
     },
 
     cardMainStats: {
-      alignItems: "center",
+      alignItems: 'center',
       //alignContent: "center",
       justifyContent: 'space-between',
       paddingBottom: 5,
@@ -293,32 +291,31 @@ const styles = (mainColor) =>
 
     textMainStats: {
       fontSize: 24,
-      textTransform: "capitalize",
+      textTransform: 'capitalize',
       fontWeight: '800',
       marginTop: 15
-     
     },
 
     statsTitleText: {
       fontSize: 20,
-      fontWeight: "bold",
-      alignSelf: "flex-start",
+      fontWeight: 'bold',
+      alignSelf: 'flex-start',
       marginLeft: 15,
       marginBottom: 15,
       color: `${mainColor}`,
 
-      textShadowColor: "#C7C7C7",
+      textShadowColor: '#C7C7C7',
       textShadowOffset: {
         width: 0,
-        height: 2,
+        height: 2
       },
-      
+
       textShadowRadius: 2
     },
 
     statsBarSection: {
-      width: "100%",
+      width: '100%',
       paddingVertical: 10,
-      backgroundColor: "#FFF",
-    },
-  });
+      backgroundColor: '#FFF'
+    }
+  })

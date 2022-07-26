@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -8,87 +8,72 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard
-} from "react-native";
+} from 'react-native'
 
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from '@react-navigation/native'
 
-import { Feather } from "@expo/vector-icons";
+import { Feather } from '@expo/vector-icons'
 
-import PokemonCardItem from "../../Components/PokemonCardItem";
-
-
+import PokemonCardItem from '../../Components/PokemonCardItem'
 
 export default function Search() {
-
-
   const [input, setInput] = useState('')
 
   const [searchedPokemons, setSearchedPokemons] = useState([])
 
   const route = useRoute()
 
-
- async function handleSearchPokemon (){
-    if(input === ''){
-
-      alert("Digite algum nome")
+  async function handleSearchPokemon() {
+    if (input === '') {
+      alert('Digite algum nome')
 
       return
-
     }
-
-
 
     const response = await route.params?.pokemonData
 
-    function filterResponse(pokemonObj){
-      if(pokemonObj?.name.startsWith(`${input}`))
-        return true
+    function filterResponse(pokemonObj) {
+      if (pokemonObj?.name.startsWith(`${input}`)) return true
     }
 
     const cleanResponse = response.filter(filterResponse)
 
-  
-     console.log(cleanResponse)
+    console.log(cleanResponse)
 
-     setSearchedPokemons('')
+    setSearchedPokemons('')
 
-      setSearchedPokemons(cleanResponse)
+    setSearchedPokemons(cleanResponse)
 
-      setInput('')
-      
-      Keyboard.dismiss()
+    setInput('')
 
-    
+    Keyboard.dismiss()
   }
   return (
     <SafeAreaView style={styles.container}>
-
       <View style={styles.containerInput}>
         <TextInput
           value={input}
-          onChangeText={(text) => setInput(text)}
+          onChangeText={text => setInput(text)}
           style={styles.input}
-          placeholder="Busque o pokemón que procura!"/>
+          placeholder="Busque o pokemón que procura!"
+        />
 
-      <TouchableOpacity style={styles.searchButton} onPress = {handleSearchPokemon}>
-        <Feather name="search" size={25} color="#000" />
-      </TouchableOpacity>
-        
+        <TouchableOpacity
+          style={styles.searchButton}
+          onPress={handleSearchPokemon}
+        >
+          <Feather name="search" size={25} color="#000" />
+        </TouchableOpacity>
       </View>
 
-      <FlatList 
-      style = {{flex: 1}}
-      showsVerticalScrollIndicator = {false}
-      numColumns = {2}
-      data={searchedPokemons}
-      keyExtractor = {(item, index) => String(index)}
-      renderItem = {({item}) => <PokemonCardItem pokemon = {item}/>}/>
-
-     
-      
-
-      
+      <FlatList
+        style={{ flex: 1 }}
+        showsVerticalScrollIndicator={false}
+        numColumns={2}
+        data={searchedPokemons}
+        keyExtractor={index => String(index)}
+        renderItem={({ item }) => <PokemonCardItem pokemon={item} />}
+      />
     </SafeAreaView>
   )
 }
@@ -96,11 +81,11 @@ export default function Search() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
-    padding: 15,
+    backgroundColor: '#FFF',
+    padding: 15
   },
   containerInput: {
-    flexDirection: "row",
+    flexDirection: 'row',
     width: '100%',
     height: 40,
     alignItems: 'center',
@@ -116,7 +101,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 4,
     padding: 12,
     fontSize: 16
-
   },
 
   searchButton: {
@@ -126,6 +110,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#C4C4C4',
     height: 45,
     borderTopRightRadius: 4,
-    borderBottomRightRadius: 4,
+    borderBottomRightRadius: 4
   }
-});
+})
